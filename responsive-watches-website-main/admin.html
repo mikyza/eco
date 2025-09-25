@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eco-Life Admin Dashboard</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; background: #f5f6fa; color: #333; }
+
+    /* Topbar */
+    .topbar {
+      position: fixed; top: 0; left: 0; width: 100%; height: 60px;
+      background: #2c3e50; color: #fff;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 20px; z-index: 1000;
+    }
+    .brand { font-size: 20px; font-weight: bold; }
+    .search { padding: 6px; border-radius: 4px; border: none; }
+    .btn { padding: 6px 12px; background: #e74c3c; border: none; color: #fff; border-radius: 4px; cursor: pointer; }
+
+    /* Layout */
+    .container { display: flex; margin-top: 60px; }
+    .sidebar {
+      width: 200px; background: #34495e; height: calc(100vh - 60px);
+      position: fixed; top: 60px; left: 0; padding-top: 20px;
+    }
+    .sidebar button {
+      display: block; width: 100%; padding: 12px;
+      border: none; background: none; color: #ecf0f1;
+      text-align: left; cursor: pointer;
+    }
+    .sidebar button.active { background: #2ecc71; color: #fff; }
+    .sidebar button:hover { background: #3d566e; }
+
+    .main { margin-left: 200px; padding: 20px; flex: 1; }
+
+    /* Sections */
+    .section { display: none; }
+    .section.active { display: block; }
+
+    /* Stats */
+    .stats {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 15px; margin-bottom: 20px;
+    }
+    .stat-card {
+      background: #fff; padding: 15px; border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .stat-title { font-size: 14px; color: #888; }
+    .stat-value { font-size: 20px; font-weight: bold; margin-top: 5px; }
+
+    /* Table */
+    table {
+      width: 100%; border-collapse: collapse; background: #fff;
+      border-radius: 8px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    th, td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; }
+    th { background: #ecf0f1; }
+    tr:hover { background: #fafafa; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .sidebar { width: 150px; }
+      .main { margin-left: 150px; }
+    }
+    @media (max-width: 600px) {
+      .sidebar { display: none; }
+      .main { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="brand">Eco-Life Admin</div>
+    <div>
+      <input class="search" placeholder="Search products...">
+      <button class="btn">Logout</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <button class="nav-btn active" data-target="dashboard">Dashboard</button>
+      <button class="nav-btn" data-target="products">Products</button>
+      <button class="nav-btn" data-target="orders">Orders</button>
+      <button class="nav-btn" data-target="users">Users</button>
+    </aside>
+
+    <!-- Main content -->
+    <main class="main">
+      <!-- Dashboard Section -->
+      <section id="dashboard" class="section active">
+        <h2>Dashboard Overview</h2>
+        <div class="stats">
+          <div class="stat-card">
+            <div class="stat-title">Total Products</div>
+            <div class="stat-value">120</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-title">Total Orders</div>
+            <div class="stat-value">340</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-title">Revenue</div>
+            <div class="stat-value">$25,400</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Products Section -->
+      <section id="products" class="section">
+        <h2>Manage Products</h2>
+        <table>
+          <thead>
+            <tr><th>Product</th><th>Category</th><th>Stock</th><th>Price</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Smartphone X</td><td>Mobile</td><td>34</td><td>$599</td></tr>
+            <tr><td>Laptop Pro</td><td>Computers</td><td>12</td><td>$1200</td></tr>
+            <tr><td>Wireless Headset</td><td>Accessories</td><td>58</td><td>$99</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Orders Section -->
+      <section id="orders" class="section">
+        <h2>Recent Orders</h2>
+        <table>
+          <thead>
+            <tr><th>Order ID</th><th>Customer</th><th>Status</th><th>Total</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>#1023</td><td>Jane Doe</td><td>Shipped</td><td>$599</td></tr>
+            <tr><td>#1024</td><td>Mike Smith</td><td>Pending</td><td>$1200</td></tr>
+            <tr><td>#1025</td><td>Susan Lee</td><td>Delivered</td><td>$99</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Users Section -->
+      <section id="users" class="section">
+        <h2>Manage Users</h2>
+        <table>
+          <thead>
+            <tr><th>User ID</th><th>Name</th><th>Email</th><th>Role</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>U001</td><td>Admin One</td><td>admin@eco-life.com</td><td>Admin</td></tr>
+            <tr><td>U002</td><td>John Customer</td><td>john@example.com</td><td>Customer</td></tr>
+            <tr><td>U003</td><td>Sarah Seller</td><td>sarah@example.com</td><td>Seller</td></tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Handle navigation clicks
+    const buttons = document.querySelectorAll(".nav-btn");
+    const sections = document.querySelectorAll(".section");
+
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        // remove active from all
+        buttons.forEach(b => b.classList.remove("active"));
+        sections.forEach(s => s.classList.remove("active"));
+
+        // activate clicked button + its target section
+        btn.classList.add("active");
+        const target = document.getElementById(btn.dataset.target);
+        if (target) target.classList.add("active");
+      });
+    });
+  </script>
+</body>
+</html>
